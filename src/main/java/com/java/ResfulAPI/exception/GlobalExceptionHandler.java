@@ -101,11 +101,12 @@ public class GlobalExceptionHandler {
         public ResponseEntity<ApiError> handleGenericException(
                         Exception ex,
                         HttpServletRequest request) {
+                ex.printStackTrace(); // In lỗi ra terminal chạy Spring Boot
                 ApiError error = new ApiError(
                                 LocalDateTime.now(),
                                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
                                 HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
-                                "Đã xảy ra lỗi nội bộ hệ thống",
+                                "Đã xảy ra lỗi nội bộ hệ thống. Chi tiết: " + ex.getMessage(),
                                 request.getRequestURI());
 
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);

@@ -25,7 +25,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:4.0.1")
 	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -39,6 +38,10 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
 	testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:4.0.1")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.13")
+	tasks.withType(JavaCompile) {
+    options.compilerArgs += ['-parameters']
+}
 }
 
 tasks.withType<Test> {

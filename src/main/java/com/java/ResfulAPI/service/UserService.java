@@ -31,20 +31,21 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy user với id = " + id));
     }
 
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     public User updateUser(Long id, User request) {
         User currentUser = getUserById(id);
-
         currentUser.setName(request.getName());
         currentUser.setEmail(request.getEmail());
-
         if (request.getPassword() != null && !request.getPassword().isBlank()) {
             currentUser.setPassword(passwordEncoder.encode(request.getPassword()));
         }
-
         return userRepository.save(currentUser);
     }
 
@@ -53,7 +54,4 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public User getUserByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
 }
